@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,7 +71,7 @@ public class CompactCalendarTab extends Fragment implements IServiceHandler {
         logEventsByMonth(compactCalendarView);
 
         //set initial title
-        toolbar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+        toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         toolbar.setTitle(dateFormatForMonth.format(compactCalendarView.getFirstDayOfCurrentMonth()));
 
         //set title on calendar scroll
