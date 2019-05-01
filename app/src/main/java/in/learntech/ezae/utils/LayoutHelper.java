@@ -109,10 +109,10 @@ public class LayoutHelper {
             }
             button_launch.setTag(R.string.lp_seq,lpSeq);
             button_launch.setTag(R.string.module_seq,moduleSeq);
-            button_launch.setTag(R.string.isreattemtped,reattempts > 0);
+            button_launch.setTag(R.string.isreattemtped,false);
             imageView_launch.setTag(R.string.lp_seq,lpSeq);
             imageView_launch.setTag(R.string.module_seq,moduleSeq);
-            imageView_launch.setTag(R.string.isreattemtped,reattempts > 0);
+            imageView_launch.setTag(R.string.isreattemtped,false);
 
 
             if (moduleType.equals("lesson")) {
@@ -153,6 +153,8 @@ public class LayoutHelper {
                     loadImage(imageView_launch,"reattempt1");
                     backroundDrawable = R.drawable.border_shape_orange;
                     button_launch.setText("Re-attempt");
+                    button_launch.setTag(R.string.isreattemtped,true);
+                    imageView_launch.setTag(R.string.isreattemtped,true);
                 }else {
                     loadImage(imageView_launch,"arrow_orange");
                     backroundDrawable = R.drawable.border_shape_orange;
