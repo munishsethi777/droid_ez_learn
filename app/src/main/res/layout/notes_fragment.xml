@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <com.tubb.smrv.SwipeHorizontalMenuLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/sml"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@id/smContentView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:onClick="onClick"
+            android:layout_marginBottom="1dp"
+            android:layout_margin="6dp"
+            android:padding="2dp"
+            android:background="@color/lp_block_backround">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/colorMask"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:padding="2dp">
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:layout_gravity="top">
+                    <TextView
+                        android:id="@+id/notesHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Tony Ramirez"
+                        android:textSize="15dp"
+                        android:textColor="@color/DarkDarkgrey"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="right">
+                    <TextView
+                        android:id="@+id/notesCreatedOn"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="17:53"
+                        android:textColor="@color/DarkDarkgrey"
+                        android:textSize="10sp"
+                        android:drawableRight="@mipmap/ic_clock_small"
+                        android:drawablePadding="2dp"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_black"
+                        android:alpha="0.8"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@id/smMenuViewRight"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_light"
+            android:orientation="horizontal"
+            android:onClick="onClick">
+
+            <ImageView
+                android:id="@+id/buttonDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_close_white" />
+
+        </RelativeLayout>
+
+    </com.tubb.smrv.SwipeHorizontalMenuLayout>
+
+
+
+

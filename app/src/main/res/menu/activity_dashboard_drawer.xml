@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_trainings"
+            android:icon="@drawable/ic_my_trainings"
+            android:title="My Trainings" />
+        <item
+            android:id="@+id/nav_achivements"
+            android:icon="@drawable/ic_achievements"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_messages"
+            android:icon="@drawable/ic_menu_messags"
+            android:title="Messages" />
+        <item
+            android:id="@+id/nav_notes"
+            android:icon="@drawable/ic_menu_notes"
+            android:title="Notes" />
+        <item
+            android:id="@+id/nav_chatroom"
+            android:icon="@drawable/ic_menu_chatroom"
+            android:title="Chatrooms" />
+        <item
+            android:id="@+id/nav_Events"
+            android:icon="@drawable/ic_menu_events"
+            android:title="Events" />
+        <item
+            android:id="@+id/nav_Notifications"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Notifications" />
+    </group>
+
+    <item android:title="Profile">
+        <menu>
+            <item
+                android:id="@+id/nav_update_profile"
+                android:icon="@drawable/ic_menu_profile"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_change_password"
+                android:icon="@drawable/ic_menu_passowrd"
+                android:title="Change Password" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_menu_logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

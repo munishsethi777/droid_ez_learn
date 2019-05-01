@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.tubb.smrv.SwipeHorizontalMenuLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sml"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@id/smContentView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:onClick="onClick"
+        android:layout_margin="6dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/colorMask"
+            android:background="@drawable/border_orange_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/imageView_notifications"
+                android:layout_width="15dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_orange_radius"
+                android:src="@drawable/icons8_classroom_50"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/notification_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:padding="4dp"
+                android:textColor="@color/black"
+                android:text="New Induction Training in Hyderabad New"
+                android:textSize="15sp"
+                android:gravity="top"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="right">
+                <ImageView
+                    android:id="@+id/imageView_chatroom"
+                    android:layout_gravity="center"
+                    android:layout_width="30dp"
+                    android:onClick="onClick"
+                    android:layout_height="30dp"
+                    android:src="@drawable/arrow_right_orange"/>
+                <TextView
+                    android:id="@+id/textView_nominated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="Nominated"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/notification_button"
+                android:layout_weight="2"
+                android:visibility="gone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Chatroom"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@id/smMenuViewRight"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_red_light"
+        android:orientation="horizontal"
+        android:onClick="onClick">
+
+        <ImageView
+            android:id="@+id/buttonDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_close_white" />
+
+    </RelativeLayout>
+</com.tubb.smrv.SwipeHorizontalMenuLayout>
