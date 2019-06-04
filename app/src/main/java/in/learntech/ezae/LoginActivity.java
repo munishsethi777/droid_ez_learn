@@ -1,8 +1,8 @@
 package in.learntech.ezae;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -16,17 +16,19 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.iid.InstanceID;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+//import com.google.android.gms.gcm.GoogleCloudMessaging;
+//import com.google.android.gms.iid.InstanceID;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
 
 import in.learntech.ezae.utils.LayoutHelper;
-import in.learntech.ezae.BuildConfig;
 import in.learntech.ezae.BusinessObjects.User;
 import in.learntech.ezae.Managers.UserMgr;
 import in.learntech.ezae.messages.MessageChatActivity;
@@ -46,7 +48,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ServiceHandler mAuthTask = null;
     private UserMgr mUserMgr;
     private PreferencesUtil mPreferencesUtil;
-
+    private int mLoggedUserInSeq;
+    private String mCallName;
+    private boolean hasTokenUpdated;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -58,15 +62,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle("Sign In");
         }
-
         bg = findViewById(in.learntech.ezae.R.id.activity_loginsignup_style12);
         mPasswordView = (EditText) findViewById(in.learntech.ezae.R.id.password_view);
         mUsernameView = (EditText) findViewById(in.learntech.ezae.R.id.username_view);
         mUserMgr = UserMgr.getInstance(this);
-        int loggedInUserSeq = mUserMgr.getLoggedInUserSeq();
-        User loggedInUser = mUserMgr.getUserByUserSeq(loggedInUserSeq);
+        mLoggedUserInSeq = mUserMgr.getLoggedInUserSeq();
+        User loggedInUser = mUserMgr.getUserByUserSeq(mLoggedUserInSeq);
         mPreferencesUtil = PreferencesUtil.getInstance(getApplicationContext());
-        if(loggedInUserSeq > 0 && loggedInUser != null){
+        hasTokenUpdated = mPreferencesUtil.hasTokenUpdated();
+        if(mLoggedUserInSeq > 0 && loggedInUser != null){
+            updateFCMToken();
             goToDashboardActivity();
         }
         String url = BuildConfig.IMAGE_URL + "login-signup/style-12/Login-Register-12-960.jpg";
@@ -83,6 +88,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
+    private void updateFCMToken(){
+        if(!hasTokenUpdated) {
+            try {
+                FirebaseInstanceId.getInstance().getInstanceId()
+                        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                if (!task.isSuccessful()) {
+                                    return;
+                                }
+                                // Get new Instance ID token
+                                String token = task.getResult().getToken();
+                                mGcmid = token;
+                                updateFCMTokenCall();
+                            }
+                        });
+
+            } catch (Exception e) {
+                LayoutHelper.showToast(this, e.getMessage());
+            }
+        }
+    }
+
+    private String UPDATE_FCM_TOKEN_CALL = "updateFCMTokenCall";
+
+    private void updateFCMTokenCall(){
+        try {
+            Object[] args = {mLoggedUserInSeq, mGcmid};
+            String updateTokenUrl = MessageFormat.format(StringConstants.UPDATE_FCM_TOKEN, args);
+            mAuthTask = new ServiceHandler(updateTokenUrl,this, UPDATE_FCM_TOKEN_CALL,this);
+            mAuthTask.execute();
+        }catch (Exception e){
+            LayoutHelper.showToast(this,e.getMessage());
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -155,8 +195,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             success = response.getInt("success") == 1 ? true : false;
             message = response.getString("message");
             if(success){
-                mUserMgr.saveUserFromResponse(response);
-                goToDashboardActivity();
+                if(mCallName == UPDATE_FCM_TOKEN_CALL){
+                    mPreferencesUtil.setHasTokenUpdated();
+                }else{
+                    mUserMgr.saveUserFromResponse(response);
+                    goToDashboardActivity();
+                }
             }
         }catch (Exception e){
             message = "Error :- " + e.getMessage();
@@ -166,45 +210,66 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void setCallName(String call) {
-
+        mCallName = call;
     }
 
     public void loginWithGCMID() {
-       boolean isUserAlreadyExists = mUserMgr.isUserExistsWithUsername
-                (mUsernameView.getText().toString());
-        if(isUserAlreadyExists){
-           attemptLogin();
-        }else {
-            new AsyncTask<Void, Void, String>() {
-                GoogleCloudMessaging gcm;
-                String regid;
-
-                @Override
-                protected String doInBackground(Void... params) {
-                    try {
-                        if (gcm == null) {
-                            gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+      // boolean isUserAlreadyExists = mUserMgr.isUserExistsWithUsername
+        //        (mUsernameView.getText().toString());
+       // if(isUserAlreadyExists){
+         //  attemptLogin();
+        //}else {
+//            new AsyncTask<Void, Void, String>() {
+//               // GoogleCloudMessaging gcm;
+//                String regid;
+//
+//                @Override
+//                protected String doInBackground(Void... params) {
+//                    //try {
+//                     //   if (gcm == null) {
+//                     //       gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+//                     //   }
+//                      //  InstanceID instanceID = InstanceID.getInstance(getApplicationContext());
+//                       // regid = instanceID.getToken("834648747026",
+//                               // GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+//                        // Persist the regID - no need to register again.
+//                        //storeRegistrationId(getContext(), regid);
+//                    //} //catch (IOException ex) {
+//
+//                    //    String message = ex.getMessage();
+//
+//                   // }"
+//                    try{
+//                            regid = FirebaseInstanceId.getInstance().getToken("834648747026",null);
+//                    }catch (IOException ex){
+//                        String message = ex.getMessage();
+//                    }
+//
+//                    return regid;
+//                }
+//
+//                @Override
+//                protected void onPostExecute(String regId) {
+//                    mGcmid = regId;
+//                    attemptLogin();
+//                }
+//            }.execute(null, null, null);
+            FirebaseInstanceId.getInstance().getInstanceId()
+                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                            if (!task.isSuccessful()) {
+                                return;
+                            }
+                            // Get new Instance ID token
+                            String token = task.getResult().getToken();
+                            mGcmid = token;
+                            attemptLogin();
+                            // Log and toast
                         }
-                        InstanceID instanceID = InstanceID.getInstance(getApplicationContext());
-                        regid = instanceID.getToken("219467382005",
-                                GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-                        // Persist the regID - no need to register again.
-                        //storeRegistrationId(getContext(), regid);
-                    } catch (IOException ex) {
+                    });
 
-                        String message = ex.getMessage();
-
-                    }
-                    return regid;
-                }
-
-                @Override
-                protected void onPostExecute(String regId) {
-                    mGcmid = regId;
-                    attemptLogin();
-                }
-            }.execute(null, null, null);
-        }
+       // }
     }
 
     private void attemptLogin() {
@@ -243,9 +308,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            //username = "ETC_321";
-            //password = "9656525263";
+            //            //            // perform the user login attempt.
+            //            //            //username = "ETC_321";
+            //            //            //password = "9656525263";
             try {
                 username = URLEncoder.encode(username, "UTF-8");
                 password = URLEncoder.encode(password, "UTF-8");

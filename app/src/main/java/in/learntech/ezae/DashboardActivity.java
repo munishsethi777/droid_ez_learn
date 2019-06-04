@@ -86,7 +86,7 @@ public class DashboardActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(in.learntech.ezae.R.layout.activity_dashboard);
-        Toolbar toolbar = (Toolbar) findViewById(in.learntech.ezae.R.id.toolbar);
+        Toolbar toolbar = (Toolbar)findViewById(in.learntech.ezae.R.id.toolbar);
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
 

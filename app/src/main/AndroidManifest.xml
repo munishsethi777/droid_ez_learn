@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="in.learntech.ezae">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_learntech"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <receiver
+            android:name=".BroadcastReceiver.InstallReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".BroadcastReceiver.NetworkStateReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DashboardActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MyAchievements"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_my_achievements"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MyTrainings"
+            android:configChanges="orientation|screenSize"
+            android:label="MyTrainings"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".UserTrainingActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".NotesActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_notes"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_change_password"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".NotesEditor"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_notes_editor"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".messages.MessageActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Messageactivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".messages.MessageChatActivity"
+            android:parentActivityName=".messages.MessageActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="MessageChatActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".messages.MessageActivity" />
+        </activity>
+        <activity
+            android:name=".UpdateProfileActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_update_profile" />
+        <activity
+            android:name=".Chatroom.ChatRoomChatActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Chat"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Chatroom.ChatRoomActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Chat Rooms"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SendMessageActivity"
+            android:label="@string/title_activity_send_message"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Leaderboard.LeaderboardActivity" />
+        <activity android:name=".Events.MainActivity" />
+        <activity android:name=".Events.ClassroomActivity" />
+        <activity android:name=".NotificationActivity" />
+        <activity android:name=".GalleryUtil" />
+    </application>
+
+</manifest>

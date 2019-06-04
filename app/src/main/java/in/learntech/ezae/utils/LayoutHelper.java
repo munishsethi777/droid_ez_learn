@@ -156,9 +156,15 @@ public class LayoutHelper {
                     button_launch.setTag(R.string.isreattemtped,true);
                     imageView_launch.setTag(R.string.isreattemtped,true);
                 }else {
-                    loadImage(imageView_launch,"arrow_orange");
-                    backroundDrawable = R.drawable.border_shape_orange;
-                    button_launch.setText("Review");
+                    if(moduleType.equals("elearning")){
+                        button_launch.setText("Completed");
+                        imageView_launch.setEnabled(false);
+                        button_launch.setEnabled(false);
+                    }else {
+                        loadImage(imageView_launch, "arrow_orange");
+                        backroundDrawable = R.drawable.border_shape_orange;
+                        button_launch.setText("Review");
+                    }
                 }
                 textView_rank.setVisibility(View.VISIBLE);
                 if(moduleType.equals("quiz")) {
@@ -169,10 +175,7 @@ public class LayoutHelper {
                 }else{
                     textView_rank.setText(progress + "%");
                 }
-                if(moduleType.equals("elearning")){
-                    button_launch.setText("Completed");
-                    imageView_launch.setEnabled(false);
-                }
+
             }
             moduleLayout.setBackground(ResourcesCompat.getDrawable(mActivity.getResources(), backroundDrawable, null));
             //Allotted Badges

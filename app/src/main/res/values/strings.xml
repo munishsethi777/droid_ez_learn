@@ -17,7 +17,7 @@
     <string name="lp_seq">lpSeq</string>
     <string name="module_seq">moduleSeq</string>
     <string name="noteSeq">noteSeq</string>
-    <string name="isreattemtped">moduleSeq</string>
+    <string name="isreattemtped">isreattempted</string>
     <string name="notificationSeq">notificationSeq</string>
     <string name="title_activity_notes">Notes</string>
     <string name="title_activity_notes_editor">Notes Editor</string>
