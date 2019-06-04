@@ -39,11 +39,13 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.google.android.gms:play-services-maps:10.2.6'
     implementation 'com.google.android.gms:play-services-location:10.2.6'
-    implementation 'com.google.android.gms:play-services-gcm:10.2.6'
+    implementation "com.google.firebase:firebase-messaging:18.0.0"
     implementation 'com.tubb.smrv:swipemenu-recyclerview:5.4.0'
     implementation 'com.crystal:crystalrangeseekbar:1.1.1'
     implementation 'com.android.volley:volley:1.0.0'
     implementation 'com.google.android.gms:play-services-ads:10.2.6'
     implementation 'com.zekapp.library:progreswheelview:1.1.2'
     implementation 'com.github.woxthebox:draglistview:1.4.8'
+
 }
+apply plugin: 'com.google.gms.google-services'
