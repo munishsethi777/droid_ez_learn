@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "834648747026",
+    "firebase_url": "https://lt-ezae-android-app.firebaseio.com",
+    "project_id": "lt-ezae-android-app",
+    "storage_bucket": "lt-ezae-android-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834648747026:android:46b17e2d7d9fc0bb",
+        "android_client_info": {
+          "package_name": "in.learntech.ezae"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834648747026-o42gfi6m9sf0du8eontmkpms7faho7j1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.learntech.ezae",
+            "certificate_hash": "da1ec67f1497415ffd0e5480d98424a07076cda3"
+          }
+        },
+        {
+          "client_id": "834648747026-qbu2f3008d56v0ekj89u48a45e3l05de.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.learntech.ezae",
+            "certificate_hash": "e6dde5eb4c25ceaba0ce332e9316ff407e11963f"
+          }
+        },
+        {
+          "client_id": "834648747026-irbsooe8t32gd3030mm1hmuharq9plu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNDCfi9m04Dfrq62huuX2QH0WgUx0S16o"
+        },
+        {
+          "current_key": "AIzaSyBpAbU4K7oUGLHBgTQ8CjuPFlTiqP1n7XQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834648747026-irbsooe8t32gd3030mm1hmuharq9plu3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
