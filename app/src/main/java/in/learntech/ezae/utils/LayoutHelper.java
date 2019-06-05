@@ -72,6 +72,7 @@ public class LayoutHelper {
             String moduleImage = jsonObject.getString("imagepath");
             Integer timeAllowed = jsonObject.getInt("timeallowed");
             Integer reattempts = jsonObject.getInt("reattempts");
+            boolean isDisabledReview = jsonObject.getBoolean("isdisabledreview");
             Integer rank = 0;
             String rankStr = jsonObject.getString("leaderboard");
             if(rankStr != null && !rankStr.equals("null") && !rankStr.equals("")){
@@ -156,7 +157,8 @@ public class LayoutHelper {
                     button_launch.setTag(R.string.isreattemtped,true);
                     imageView_launch.setTag(R.string.isreattemtped,true);
                 }else {
-                    if(moduleType.equals("elearning")){
+                    if(isDisabledReview){
+                        loadImage(imageView_launch,"arrow_right_orange");
                         button_launch.setText("Completed");
                         imageView_launch.setEnabled(false);
                         button_launch.setEnabled(false);
