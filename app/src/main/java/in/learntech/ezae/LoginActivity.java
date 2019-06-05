@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private int mLoggedUserInSeq;
     private String mCallName;
     private boolean hasTokenUpdated;
+    private static int mIsFcm = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -115,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateFCMTokenCall(){
         try {
-            Object[] args = {mLoggedUserInSeq, mGcmid};
+            Object[] args = {mLoggedUserInSeq, mGcmid,mIsFcm};
             String updateTokenUrl = MessageFormat.format(StringConstants.UPDATE_FCM_TOKEN, args);
             mAuthTask = new ServiceHandler(updateTokenUrl,this, UPDATE_FCM_TOKEN_CALL,this);
             mAuthTask.execute();
@@ -314,7 +315,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             try {
                 username = URLEncoder.encode(username, "UTF-8");
                 password = URLEncoder.encode(password, "UTF-8");
-                Object[] args = {username, password, mGcmid};
+                Object[] args = {username, password, mGcmid,mIsFcm};
                 String loginUrl = MessageFormat.format(StringConstants.LOGIN_URL, args);
                 mAuthTask = new ServiceHandler(loginUrl, this, this);
                 mAuthTask.execute();

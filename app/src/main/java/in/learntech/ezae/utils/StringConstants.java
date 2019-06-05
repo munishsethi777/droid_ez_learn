@@ -42,7 +42,7 @@ public class StringConstants {
 
     //User Actions
 
-    public static final String LOGIN_URL = ACTION_API_URL + "UserAction.php?call=login&username={0}&password={1}&gcmid={2}";
+    public static final String LOGIN_URL = ACTION_API_URL + "UserAction.php?call=login&username={0}&password={1}&gcmid={2}&isfcm={3,number,#}";
     public static final String GET_COUNTS = ACTION_API_URL+"UserAction.php?call=getDashboardCounts&userSeq={0,number,#}&companySeq={1,number,#}";
     public static final String GET_DASHBOARD_COUNTS = ACTION_API_URL+"UserAction.php?call=getDashboardStats&userSeq={0,number,#}&companySeq={1,number,#}";
     public static final String GET_MYACHIEVEMENT_COUNTS = ACTION_API_URL + "UserAction.php?call=myAchievements&userSeq={0,number,#}&companyseq={1,number,#}";
@@ -59,7 +59,7 @@ public class StringConstants {
     public static final String GET_LEADERBOARD_BY_LEARNINGPLAN = ACTION_API_URL + "UserAction.php?call=getLeaderBoardDataByLearningPlan&userSeq={0,number,#}&companySeq={1,number,#}&lpSeq={2,number,#}";
     public static final String NOMINATE_TRAINING = ACTION_API_URL+"UserAction.php?call=nominateCT&userSeq={0,number,#}&companySeq={1,number,#}&trainingSeq={2,number,#}&lpSeq={3,number,#}";
     public static final String GET_SCORES = ACTION_API_URL+"UserAction.php?call=getScoresByLearningPlan&userSeq={0,number,#}&companySeq={1,number,#}&lpSeq={2,number,#}";
-    public static final String UPDATE_FCM_TOKEN = ACTION_API_URL + "UserAction.php?call=updateGCMID&userSeq={0}&gcmid={1}";
+    public static final String UPDATE_FCM_TOKEN = ACTION_API_URL + "UserAction.php?call=updateGCMID&userSeq={0}&gcmid={1}&isfcm={2,number,#}";
 
 
     //LearningPlan Actions
