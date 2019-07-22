@@ -50,58 +50,79 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="parent">
+
             <TextView
                 android:id="@+id/textView_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="top"
                 android:padding="5dp"
                 android:text="Question title"
                 android:textColor="@color/button_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/optionsLayout"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="4dp" />
-
-            <WebView
-                android:id="@+id/webView"
+            <ScrollView
+                android:id="@+id/scrollView_question"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone" />
+                android:scrollbarFadeDuration="0"
+                android:scrollbarAlwaysDrawVerticalTrack="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/imageView_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:onClick="onClick" />
 
-            <TextView
-                android:id="@+id/textView_feedbackError"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/FeedbackRed"
-                android:padding="4dp"
-                android:text="Feedback text"
-                android:textAlignment="center"
-                android:visibility="gone" />
+                <LinearLayout
+                    android:id="@+id/optionsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="4dp" />
+                    <WebView
+                        android:id="@+id/webView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/textView_feedbackSuccess"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/FeedbackGreen"
-                android:padding="4dp"
-                android:text="Feedback text"
-                android:textAlignment="center"
-                android:visibility="gone" />
+                    <TextView
+                        android:id="@+id/textView_feedbackError"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/FeedbackRed"
+                        android:padding="4dp"
+                        android:text="Feedback text"
+                        android:textAlignment="center"
+                        android:visibility="gone" />
 
-            <Button
-                android:id="@+id/button_feedbackOkay"
-                style="@style/LoginSignUp25Theme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Okay"
-                android:visibility="gone" />
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/textView_feedbackSuccess"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/FeedbackGreen"
+                        android:padding="4dp"
+                        android:text="Feedback text"
+                        android:textAlignment="center"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/button_feedbackOkay"
+                        style="@style/LoginSignUp25Theme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Okay"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </ScrollView>
+            </LinearLayout>
 
         <LinearLayout
             android:id="@+id/submitButtonLayout"

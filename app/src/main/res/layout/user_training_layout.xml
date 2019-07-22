@@ -56,47 +56,46 @@
 
     <in.learntech.ezae.Controls.CustomViewPager
         android:id="@+id/viewPager"
-        android:layout_marginTop="65dp"
         android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <LinearLayout
-        android:id="@+id/layout_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="4dp"
-        android:animateLayoutChanges="true"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/layout_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="4dp"
+                android:animateLayoutChanges="true"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-        <!--<View-->
-            <!--android:layout_width="15dp"-->
-            <!--android:layout_height="15dp"-->
-            <!--android:layout_margin="2dp"-->
-            <!--android:background="@drawable/ic_dot_grey" />-->
+                <!--<View-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_margin="2dp"-->
+                    <!--android:background="@drawable/ic_dot_grey" />-->
 
-        <!--<View-->
-            <!--android:id="@+id/indicator2"-->
-            <!--android:layout_width="15dp"-->
-            <!--android:layout_height="15dp"-->
-            <!--android:layout_margin="2dp"-->
-            <!--android:background="@drawable/ic_dot_grey" />-->
+                <!--<View-->
+                    <!--android:id="@+id/indicator2"-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_margin="2dp"-->
+                    <!--android:background="@drawable/ic_dot_grey" />-->
 
-        <!--<View-->
-            <!--android:id="@+id/indicator3"-->
-            <!--android:layout_width="15dp"-->
-            <!--android:layout_height="15dp"-->
-            <!--android:layout_margin="2dp"-->
-            <!--android:background="@drawable/ic_dot_grey" />-->
+                <!--<View-->
+                    <!--android:id="@+id/indicator3"-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_margin="2dp"-->
+                    <!--android:background="@drawable/ic_dot_grey" />-->
 
-        <!--<View-->
-            <!--android:id="@+id/indicator4"-->
-            <!--android:layout_width="15dp"-->
-            <!--android:layout_height="15dp"-->
-            <!--android:layout_margin="2dp"-->
-            <!--android:background="@drawable/ic_dot_grey" />ic_dot_grey-->
+                <!--<View-->
+                    <!--android:id="@+id/indicator4"-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_margin="2dp"-->
+                    <!--android:background="@drawable/ic_dot_grey" />ic_dot_grey-->
 
-    </LinearLayout>
+            </LinearLayout>
     </LinearLayout>
 </FrameLayout>

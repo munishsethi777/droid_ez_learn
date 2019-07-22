@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -28,9 +29,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -82,6 +85,7 @@ public class UserTrainingFragment extends Fragment implements IServiceHandler {
     public int wizard_page_position;
     private Activity mActivity;
     private JSONArray mQuizProgress;
+    private String mQuestionImagePath;
     private JSONArray mAnswers;
     private String mQuestionType;
     private ConstraintLayout mParentLayout;
@@ -112,6 +116,10 @@ public class UserTrainingFragment extends Fragment implements IServiceHandler {
     private WebView webView;
     private int mModuleSeq;
     private int mLearningPlanSeq;
+    private ImageView mQuestionImageView;
+    private LayoutHelper mLayoutHealper;
+    private ScrollView scrollView_question;
+
     public  UserTrainingFragment(int position,JSONObject moduleJson) {
         this.wizard_page_position = position;
         mModuleJson = moduleJson;
@@ -136,6 +144,9 @@ public class UserTrainingFragment extends Fragment implements IServiceHandler {
         feedbacks_error_list = new ArrayList<>();
         addButton();
         submitButton = (Button) mParentLayout.findViewById(in.learntech.ezae.R.id.button_submit_progress);
+        mQuestionImageView = (ImageView)  mParentLayout.findViewById(R.id.imageView_question);
+        mLayoutHealper = new LayoutHelper(getActivity());
+        scrollView_question = (ScrollView) mParentLayout.findViewById(R.id.scrollView_question);
         try{
             mModuleType = mModuleJson.getString("moduletype");
             mParentActivity = (UserTrainingActivity) getActivity();
@@ -146,7 +157,8 @@ public class UserTrainingFragment extends Fragment implements IServiceHandler {
                 mQuestionType = currentQuestion.getString("type");
                 mAnswers = currentQuestion.getJSONArray("answers");
                 mQuizProgress = currentQuestion.getJSONArray("progress");
-
+                String questionImage = currentQuestion.getString("questionImage");
+                mQuestionImagePath = StringConstants.IMAGE_URL + questionImage;
                 JSONArray serverProgress = mQuizProgress;
                 JSONArray localProgress = mQuesProgressMgr.getProgressJsonArr(currentQuestion.getInt("seq"), mModuleSeq, mLearningPlanSeq);
                 mQuizProgress = LayoutHelper.mergeTwoJsonArray(serverProgress, localProgress);
@@ -171,6 +183,17 @@ public class UserTrainingFragment extends Fragment implements IServiceHandler {
                     addCustomSeekBar();
                 } else if (mQuestionType.equals(ESTIMATE_PERCENTAGE)) {
                     addSeekBar();
+                }
+                if(mQuestionImagePath != null && mQuestionImagePath != "") {
+                    mLayoutHealper.loadImageRequest(mQuestionImageView, mQuestionImagePath, false);
+                    scrollView_question.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            // Ready, move up
+                            scrollView_question.setSmoothScrollingEnabled(true);
+                            scrollView_question.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
                 }
                 textView_question.setText(wizard_page_position + 1 + ". " + currentQuestion.getString("title"));
              }else{
