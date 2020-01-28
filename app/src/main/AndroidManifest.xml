@@ -38,7 +38,6 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -46,7 +45,16 @@
             android:name=".DashboardActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_dashboard"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="ezae.in"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MyAchievements"
             android:configChanges="orientation|screenSize"
@@ -56,7 +64,8 @@
             android:name=".MyTrainings"
             android:configChanges="orientation|screenSize"
             android:label="MyTrainings"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme">
+        </activity>
         <activity
             android:name=".UserTrainingActivity"
             android:configChanges="orientation|screenSize" />
